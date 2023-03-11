@@ -7,12 +7,19 @@ import { getTodoList, addTodo } from "./utils/storage";
 export default class App {
   state = {
     isOpenModal: false,
+    todoList: [],
   };
   constructor(parent, props) {
     this.parent = parent;
     this.props = props;
 
+    this.initialize();
     this.render();
+  }
+
+  initialize() {
+    const todoList = getTodoList();
+    this.setState({ todoList });
   }
 
   setState(newState) {
@@ -40,13 +47,12 @@ export default class App {
       ".todo-form-modal-container"
     );
 
-    const todoList = getTodoList();
-
     new Header(headerContainer, { onOpen: this.handleOpenModal.bind(this) });
-    new TodoListContainer(todoListContainer, { todoList });
+    new TodoListContainer(todoListContainer, { todoList: this.state.todoList });
     new TodoFormModal(todoFormModalContainer, {
       isOpen: this.state.isOpenModal,
       onClose: this.handleCloseModal.bind(this),
+      onSubmit: this.handleCreateTodo.bind(this),
     });
   }
 
@@ -58,5 +64,14 @@ export default class App {
     this.setState({ isOpenModal: false });
   }
 
-  addTodo(newTodo) {}
+  handleCreateTodo(newTodo) {
+    const newTodoList = addTodo({
+      id: this.state.todoList.length + 1,
+      complete: false,
+      ...newTodo,
+    });
+
+    this.setState({ todoList: newTodoList });
+    this.handleCloseModal();
+  }
 }

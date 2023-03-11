@@ -3,11 +3,7 @@ const STORAGE_KEY = {
 };
 
 const getTodoList = () => {
-  const todoList = [
-    { id: 1, title: "hello", content: "starbucks", complete: false },
-    { id: 2, title: "hello2", content: "starbucks2", complete: false },
-    { id: 2, title: "hello2", content: "starbucks2", complete: false },
-  ]; // getStorageData(STORAGE_KEY.todoList) ||
+  const todoList = getStorageData(STORAGE_KEY.todoList) || [];
 
   return todoList;
 };
@@ -17,6 +13,8 @@ const addTodo = (newTodo) => {
   const newTodoList = [...todoList, newTodo];
 
   setStorage(STORAGE_KEY.todoList, newTodoList);
+
+  return getTodoList();
 };
 
 const getStorageData = (key) => {

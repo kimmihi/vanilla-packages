@@ -110,7 +110,7 @@
   justify-content: space-around;
 }
 
-.modal-wrapper .modal .modal-content form input {
+.modal-wrapper .modal .modal-content .todo-form input {
   height: 40px;
   padding: 8px;
   color: #1a1a1a;
@@ -119,7 +119,7 @@
   border-radius: 8px;
 }
 
-.modal-wrapper .modal .modal-content form .todo-add-btn {
+.modal-wrapper .modal .modal-content .todo-form .todo-add-btn {
   width: 30%;
   padding: 8px;
   font-weight: 500;

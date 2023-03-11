@@ -17,7 +17,7 @@ export default class TodoFormModal {
                     <button class="modal-close-btn">X</button>
                 </div>
                 <div class="modal-content">
-                    <form>
+                    <form class="todo-form">
                         <input class="todo-title-input" placeholder="할 일 제목"/>
                         <input class="todo-content-input" placeholder="내용"/>
                         <button class="todo-add-btn">추 가</button>
@@ -36,6 +36,22 @@ export default class TodoFormModal {
 
   setEvent() {
     this.handleCloseModal();
+    this.handleSubmitTodo();
+  }
+
+  handleSubmitTodo() {
+    const { onSubmit } = this.props;
+    const todoForm = document.querySelector(".todo-form");
+
+    todoForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const [titleInput, contentInput] = e.target;
+
+      onSubmit({
+        title: titleInput.value,
+        content: contentInput.value,
+      });
+    });
   }
 
   handleCloseModal() {
