@@ -12,12 +12,25 @@ export default class Header {
             <h1 id="title">
                 My Todo
             </h1>
-            <button>+</button>
+            <button class="open-modal-btn">+</button>
         </header>
     `;
   }
 
   render() {
     this.parent.innerHTML = this.template();
+    this.setEvent();
+  }
+
+  setEvent() {
+    this.onClickOpenModalBtn();
+  }
+
+  onClickOpenModalBtn() {
+    const openModalBtn = document.querySelector(".open-modal-btn");
+    const { onOpen } = this.props;
+    openModalBtn.addEventListener("click", () => {
+      onOpen();
+    });
   }
 }

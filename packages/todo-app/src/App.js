@@ -1,13 +1,22 @@
 import Header from "./components/Layout/Header";
 import TodoListContainer from "./components/TodoListContainer";
+import TodoFormModal from "./components/TodoFormModal";
 
-import { getTodoList } from "./utils/storage";
+import { getTodoList, addTodo } from "./utils/storage";
 
 export default class App {
+  state = {
+    isOpenModal: false,
+  };
   constructor(parent, props) {
     this.parent = parent;
     this.props = props;
 
+    this.render();
+  }
+
+  setState(newState) {
+    this.state = { ...this.state, ...newState };
     this.render();
   }
 
@@ -27,10 +36,27 @@ export default class App {
   mounted() {
     const headerContainer = document.querySelector(".header-container");
     const todoListContainer = document.querySelector(".todo-list-container");
+    const todoFormModalContainer = document.querySelector(
+      ".todo-form-modal-container"
+    );
 
     const todoList = getTodoList();
 
-    new Header(headerContainer);
+    new Header(headerContainer, { onOpen: this.handleOpenModal.bind(this) });
     new TodoListContainer(todoListContainer, { todoList });
+    new TodoFormModal(todoFormModalContainer, {
+      isOpen: this.state.isOpenModal,
+      onClose: this.handleCloseModal.bind(this),
+    });
   }
+
+  handleOpenModal() {
+    this.setState({ isOpenModal: true });
+  }
+
+  handleCloseModal() {
+    this.setState({ isOpenModal: false });
+  }
+
+  addTodo(newTodo) {}
 }
