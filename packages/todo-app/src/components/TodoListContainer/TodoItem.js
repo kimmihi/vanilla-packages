@@ -12,7 +12,7 @@ export default class TodoItem {
               <h3 class="todo-title">${todo.title}</h3>
               <p class="todo-content">${todo.content}</p>
           </div>
-           <button class="finish-btn">완료</button>
+           <button class="finish-btn" data-todo-id="${todo.id}">완료</button>
         </div>
         `;
   }
@@ -20,4 +20,18 @@ export default class TodoItem {
   render() {
     this.parent.innerHTML = this.template();
   }
+
+  // setEvent() {
+  //   this.handleClickFinishBtn();
+  // }
+
+  // handleClickFinishBtn() {
+  //   const { todo, onFinish } = this.props;
+  //   const finishBtn = document.querySelector(".finish-btn");
+
+  //   finishBtn.addEventListener("click", () => {
+  //     console.log("finish btn");
+  //     onFinish(todo.id);
+  //   });
+  // }
 }

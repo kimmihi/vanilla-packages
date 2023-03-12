@@ -17,6 +17,16 @@ const addTodo = (newTodo) => {
   return getTodoList();
 };
 
+const updateTodo = (todoId) => {
+  const todoList = getTodoList();
+  const updatedTodoList = todoList.map((todo) =>
+    todo.id === todoId ? { ...todo, complete: true } : todo
+  );
+  setStorage(STORAGE_KEY.todo, updatedTodoList);
+
+  return updatedTodoList;
+};
+
 const getStorageData = (key) => {
   return JSON.parse(localStorage.getItem(key));
 };
@@ -26,4 +36,4 @@ const setStorage = (key, value) => {
   localStorage.setItem(key, JSON.stringify(value));
 };
 
-export { getTodoList, addTodo };
+export { getTodoList, addTodo, updateTodo };

@@ -2,7 +2,7 @@ import Header from "./components/Layout/Header";
 import TodoListContainer from "./components/TodoListContainer";
 import TodoFormModal from "./components/TodoFormModal";
 
-import { getTodoList, addTodo } from "./utils/storage";
+import { getTodoList, addTodo, updateTodo } from "./utils/storage";
 
 export default class App {
   state = {
@@ -48,7 +48,10 @@ export default class App {
     );
 
     new Header(headerContainer, { onOpen: this.handleOpenModal.bind(this) });
-    new TodoListContainer(todoListContainer, { todoList: this.state.todoList });
+    new TodoListContainer(todoListContainer, {
+      todoList: this.state.todoList,
+      onFinish: this.handleUpdateTodo.bind(this),
+    });
     new TodoFormModal(todoFormModalContainer, {
       isOpen: this.state.isOpenModal,
       onClose: this.handleCloseModal.bind(this),
@@ -73,5 +76,10 @@ export default class App {
 
     this.setState({ todoList: newTodoList });
     this.handleCloseModal();
+  }
+
+  handleUpdateTodo(todoId) {
+    const updatedTodoList = updateTodo(todoId);
+    this.setState({ todoList: updatedTodoList });
   }
 }
