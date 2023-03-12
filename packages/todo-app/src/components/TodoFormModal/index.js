@@ -43,7 +43,7 @@ export default class TodoFormModal {
     const { onSubmit } = this.props;
     const todoForm = document.querySelector(".todo-form");
 
-    todoForm.addEventListener("submit", (e) => {
+    todoForm?.addEventListener("submit", (e) => {
       e.preventDefault();
       const [titleInput, contentInput] = e.target;
 
@@ -57,7 +57,7 @@ export default class TodoFormModal {
   handleCloseModal() {
     const modalCloseBtn = document.querySelector(".modal-close-btn");
     const { onClose } = this.props;
-    modalCloseBtn.addEventListener("click", () => {
+    modalCloseBtn?.addEventListener("click", () => {
       onClose();
     });
   }
