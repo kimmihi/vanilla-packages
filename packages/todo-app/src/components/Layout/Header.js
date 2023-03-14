@@ -12,6 +12,11 @@ export default class Header {
             <h1 id="title">
                 My Todo
             </h1>
+            <div class="nav">
+              <a href="#/all">전체</a>
+              <a href="#/complete">완료</a>
+              <a href="#/incomplete">미완료</a>
+            </div>
             <button class="open-modal-btn">+</button>
         </header>
     `;
